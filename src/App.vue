@@ -5,22 +5,55 @@
     </header>
 
     <main>
-
+      <div v-for="(item, index) in accordionData" :key="index">
+        <Accordion>
+          <template v-slot:title>
+            <span class="font-semibold text-xl">{{item.title}}</span>
+          </template>
+          <template v-slot:content>
+          <p>
+            {{item.content}}
+          </p>
+        </template>
+        </Accordion>
+      </div>
     </main>
   </div>
 </template>
 
 <script>
   import Banner from './components/Banner.vue';
+  import Accordion from './components/Accordion.vue';
 
   export default {
     components: {
-      Banner
+      Banner,
+      Accordion
     },
     data() {
       return {
-        bannerTitle: "This is the base components"
+        bannerTitle: 'This is the base components',
+        accordionData: [
+            {
+                "id": 1,
+                "title": "Title one",
+                "content": "Content One"
+            },
+            {
+                "id": 2,
+                "title": "Title two",
+                "content": "Content two"
+            },
+            {
+                "id": 3,
+                "title": "Title three",
+                "content": "Content three"
+            }
+        ]
       }
+    },
+    mounted() {
+      console.log('the component is now mounted.', this.accordionData);
     }
   };
 </script>
